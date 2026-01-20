@@ -29,12 +29,10 @@ export function calculateMeanCoordinates(polygonPoints) {
   const meanEasting = sum.easting / n;
   const meanNorthing = sum.northing / n;
   
-  // GA = mean of E - mean of N
-  const ga = meanEasting - meanNorthing;
-
-  const gaFixed = ga.toFixed(6);
-  const [intPart, fracPart] = gaFixed.split('.');
-  const formattedGA = `GA${intPart.replace('-', '-')}-${fracPart}`;
+  // GA = concatenate integer parts of mean E and mean N
+  const meanEInt = Math.round(meanEasting);
+  const meanNInt = Math.round(meanNorthing);
+  const formattedGA = `GA${meanEInt}-${meanNInt}`;
 
   return {
     easting: meanEasting,
