@@ -11,7 +11,7 @@
  */
 export function calculateMeanCoordinates(polygonPoints) {
   if (!polygonPoints || polygonPoints.length === 0) {
-    return { easting: 0, northing: 0, formatted: '0.000000, 0.000000', ga: 'GA(0.000000)' };
+    return { easting: 0, northing: 0, formatted: '0.000000, 0.000000', ga: 'GA0' };
   }
 
   const n = polygonPoints.length;
@@ -36,7 +36,7 @@ export function calculateMeanCoordinates(polygonPoints) {
     easting: meanEasting,
     northing: meanNorthing,
     formatted: `E: ${meanEasting.toFixed(6)}, N: ${meanNorthing.toFixed(6)}`,
-    ga: `GA(${ga.toFixed(6)})`,
+    ga: `GA${ga.toFixed(0)}`,
   };
 }
 

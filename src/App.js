@@ -19,6 +19,7 @@ function App() {
   const [gapaNumber, setGapaNumber] = useState('');
   const [meanCoordinates, setMeanCoordinates] = useState(null);
   const [jobCode, setJobCode] = useState('');
+  const [editableJobCode, setEditableJobCode] = useState('');
   const [isGenerated, setIsGenerated] = useState(false);
   const [activeView, setActiveView] = useState('input');
 
@@ -43,6 +44,7 @@ function App() {
       const mean = calculateMeanCoordinates(polygonPoints);
       console.log('Calculated mean:', mean);
       setMeanCoordinates(mean);
+      setEditableJobCode(mean.ga); // Initialize editable job code with calculated value
       setIsGenerated(false);
     } else {
       console.warn('Calculate Mean attempted but no polygon points.');
@@ -68,15 +70,15 @@ function App() {
 
   useEffect(() => {
     // Ensure barcode is rendered whenever preview is active (SVG may remount when switching views)
-    if (isGenerated && meanCoordinates && activeView === 'preview' && leftBarcodeRef.current) {
-      JsBarcode(leftBarcodeRef.current, meanCoordinates.ga, {
+    if (isGenerated && editableJobCode && activeView === 'preview' && leftBarcodeRef.current) {
+      JsBarcode(leftBarcodeRef.current, editableJobCode, {
         format: 'CODE128',
         width: 2,
         height: 80,
         displayValue: false,
       });
     }
-  }, [isGenerated, meanCoordinates, activeView]);
+  }, [isGenerated, editableJobCode, activeView]);
 
   const handleExportPDF = async () => {
     if (!isGenerated) {
@@ -101,6 +103,7 @@ function App() {
     setGapaNumber('');
     setMeanCoordinates(null);
     setJobCode('');
+    setEditableJobCode('');
     setIsGenerated(false);
     setActiveView('input');
   };
@@ -130,7 +133,7 @@ function App() {
               <div className="info-box">
                 <p><strong>E:</strong> <span className="info-value">{meanCoordinates.easting.toFixed(6)}</span></p>
                 <p><strong>N:</strong> <span className="info-value">{meanCoordinates.northing.toFixed(6)}</span></p>
-                <p><strong>GA:</strong> <span className="info-value">{meanCoordinates.ga}</span></p>
+                <p><strong>GA:</strong> <span className="info-value">{editableJobCode || meanCoordinates.ga}</span></p>
               </div>
             </div>
           )}
@@ -200,8 +203,13 @@ function App() {
                       <input type="text" value={meanCoordinates.northing.toFixed(6)} readOnly />
                     </div>
                     <div className="mean-item full-width">
-                      <label>GA Value:</label>
-                      <input type="text" value={meanCoordinates.ga} readOnly />
+                      <label>Job Code (Mean):</label>
+                      <input 
+                        type="text" 
+                        value={editableJobCode} 
+                        onChange={(e) => setEditableJobCode(e.target.value)}
+                        placeholder="Auto-calculated GA value"
+                      />
                     </div>
                   </div>
                 </div>
@@ -241,7 +249,7 @@ function App() {
                   </div>
 
                   {/** GA text under the barcode */}
-                  <div className="ga-left">{meanCoordinates ? meanCoordinates.ga : ''}</div>
+                  <div className="ga-left">{editableJobCode || (meanCoordinates ? meanCoordinates.ga : '')}</div>
                 </div>
 
                 {/** Right QR on top-right */}
@@ -284,7 +292,7 @@ function App() {
                   <tbody>
                     <tr><td><strong>Mean Easting (E):</strong></td><td>{meanCoordinates.easting.toFixed(6)}</td></tr>
                     <tr><td><strong>Mean Northing (N):</strong></td><td>{meanCoordinates.northing.toFixed(6)}</td></tr>
-                    <tr><td><strong>GA (E - N):</strong></td><td>{meanCoordinates.ga}</td></tr>
+                    <tr><td><strong>GA (E - N):</strong></td><td>{editableJobCode || meanCoordinates.ga}</td></tr>
                   </tbody>
                 </table>
               </div>
