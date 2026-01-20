@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Land-Commission-Ghana/static/css/main.1883ffca.css",
-    "main.js": "/Land-Commission-Ghana/static/js/main.c3f6e76b.js",
+    "main.css": "/Land-Commission-Ghana/static/css/main.a72085e9.css",
+    "main.js": "/Land-Commission-Ghana/static/js/main.2715f8db.js",
     "static/js/213.5e1e5567.chunk.js": "/Land-Commission-Ghana/static/js/213.5e1e5567.chunk.js",
     "static/js/732.86557898.chunk.js": "/Land-Commission-Ghana/static/js/732.86557898.chunk.js",
     "index.html": "/Land-Commission-Ghana/index.html",
-    "main.1883ffca.css.map": "/Land-Commission-Ghana/static/css/main.1883ffca.css.map",
-    "main.c3f6e76b.js.map": "/Land-Commission-Ghana/static/js/main.c3f6e76b.js.map",
+    "main.a72085e9.css.map": "/Land-Commission-Ghana/static/css/main.a72085e9.css.map",
+    "main.2715f8db.js.map": "/Land-Commission-Ghana/static/js/main.2715f8db.js.map",
     "213.5e1e5567.chunk.js.map": "/Land-Commission-Ghana/static/js/213.5e1e5567.chunk.js.map",
     "732.86557898.chunk.js.map": "/Land-Commission-Ghana/static/js/732.86557898.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1883ffca.css",
-    "static/js/main.c3f6e76b.js"
+    "static/css/main.a72085e9.css",
+    "static/js/main.2715f8db.js"
   ]
 }
