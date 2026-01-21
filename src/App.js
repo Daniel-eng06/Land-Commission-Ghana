@@ -22,20 +22,19 @@ function App() {
   const [isGenerated, setIsGenerated] = useState(false);
   const [activeView, setActiveView] = useState('input');
   const [editableGA, setEditableGA] = useState('');
+  const [generationCount, setGenerationCount] = useState(() => {
+    const saved = localStorage.getItem('lcGenerationCount');
+    return saved ? parseInt(saved, 10) : 0;
+  });
 
   const pdfContentRef = useRef(null);
   const leftBarcodeRef = useRef(null);
 
-  const handleParseCoordinates = () => {
-    console.log('Parse clicked, input:', coordinateInput);
-    const parsed = parseCoordinateText(coordinateInput);
-    console.log('Parsed result:', parsed);
+  const handleParseCoordinates = (text) => {
+    const parsed = parseCoordinateText(text);
     setPolygonPoints(parsed);
     setMeanCoordinates(null);
     setIsGenerated(false);
-    if (parsed.length === 0) {
-      console.warn('No valid coordinates found. Please check your input format.');
-    }
   };
 
   const handleCalculateMean = () => {
@@ -66,6 +65,11 @@ function App() {
     setJobCode(newJobCode);
     setIsGenerated(true);
     setActiveView('preview');
+    
+    // Increment generation count and save to localStorage
+    const newCount = generationCount + 1;
+    setGenerationCount(newCount);
+    localStorage.setItem('lcGenerationCount', newCount.toString());
   };
 
   useEffect(() => {
@@ -163,21 +167,15 @@ function App() {
                 <label>Polygon Coordinates (Eastings, Northings)</label>
                 <textarea
                   value={coordinateInput}
-                  onChange={(e) => setCoordinateInput(e.target.value)}
-                  onBlur={handleParseCoordinates}
-                  onPaste={(e) => { setTimeout(handleParseCoordinates, 50); }}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setCoordinateInput(newValue);
+                    handleParseCoordinates(newValue);
+                  }}
                   placeholder="WKT Format: POLYGON((E1 N1, E2 N2, E3 N3, E1 N1))&#10;Or line format:&#10;123456.789 234567.890&#10;123567.890 234678.901"
                   rows="10"
                 />
-                <button onClick={handleParseCoordinates} className="btn-secondary">Parse Coordinates</button>
               </div>
-
-              {polygonPoints.length > 0 && (
-                <div className="form-group">
-                  <label>Parsed Points ({polygonPoints.length})</label>
-                  <div className="coordinate-display">{formatPolygonForDisplay(polygonPoints)}</div>
-                </div>
-              )}
 
               <div className="form-group">
                 <label>GAPA Number</label>
@@ -192,16 +190,7 @@ function App() {
 
               {meanCoordinates && (
                 <div className="mean-display">
-                  <h3>Calculated Mean Coordinates:</h3>
                   <div className="mean-values">
-                    <div className="mean-item">
-                      <label>Easting (E):</label>
-                      <input type="text" value={meanCoordinates.easting.toFixed(6)} readOnly />
-                    </div>
-                    <div className="mean-item">
-                      <label>Northing (N):</label>
-                      <input type="text" value={meanCoordinates.northing.toFixed(6)} readOnly />
-                    </div>
                     <div className="mean-item full-width">
                       <label>Job Code (Mean):</label>
                       <input type="text" value={editableGA} onChange={(e) => setEditableGA(e.target.value)} />
@@ -278,6 +267,10 @@ function App() {
                 <div className="stat-card">
                   <h3>Status</h3>
                   <p className="stat-value">{isGenerated ? '✅ Ready' : '⏳ Pending'}</p>
+                </div>
+                <div className="stat-card">
+                  <h3>Codes Generated</h3>
+                  <p className="stat-value">{generationCount}</p>
                 </div>
               </div>
               {meanCoordinates && (
