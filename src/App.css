@@ -6,8 +6,8 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5;
-  color: #333;
+  background-color: #000000;
+  color: #e8e8e8;
 }
 
 .app {
@@ -17,38 +17,43 @@ body {
 
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg, #1a5490 0%, #134070 100%);
-  color: white;
+  background: linear-gradient(180deg, #1a5490 0%, #0d3a6b 100%);
+  color: #ffffff;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 0 12px rgba(26, 84, 144, 0.3);
+  border-right: 1px solid #2d6cb5;
 }
 
 .sidebar-header {
   padding: 2rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-header h2 {
   font-size: 1.5rem;
   margin-bottom: 0.25rem;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .sidebar-header p {
   font-size: 0.85rem;
-  opacity: 0.8;
+  opacity: 0.9;
+  color: #e8e8e8;
 }
 
 .sidebar-nav {
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .nav-item {
   width: 100%;
   padding: 0.75rem 1.5rem;
   background: transparent;
-  color: white;
+  color: #ffffff;
   border: none;
   text-align: left;
   font-size: 0.95rem;
@@ -57,6 +62,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  font-weight: 500;
 }
 
 .nav-icon {
@@ -64,12 +70,14 @@ body {
 }
 
 .nav-item:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(2px);
 }
 
 .nav-item.active {
-  background: rgba(255, 255, 255, 0.2);
-  border-left: 4px solid white;
+  background: rgba(255, 255, 255, 0.25);
+  border-left: 4px solid #ffffff;
+  font-weight: 600;
 }
 
 .nav-item:disabled {
@@ -89,12 +97,13 @@ body {
 }
 
 .info-box {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;
   margin-left: -20px;
-  width: 120%
+  width: 120%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   /* allow the info box to be slightly wider within the sidebar and prevent truncation */
 }
 
@@ -113,12 +122,15 @@ body {
   text-overflow: clip;
   margin-left: 8px;
   font-size: 0.95rem;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* pinned bottom block so mean/polygon info are always visible */
 .sidebar-bottom {
   padding: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* A4 preview layout */
@@ -138,12 +150,13 @@ body {
   top: 15mm;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* center barcode and GA under the QR */
-  gap: 15px;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .qr-left {
-  width: 70px;
+  width: 85px;
+  height: 85px;
   display: flex;
   align-items: start;
   justify-content: start;
@@ -187,25 +200,32 @@ body {
   gap: 8px;
 }
 
+.qr-right {
+  width: 85px;
+  height: 85px;
+}
+
 .barcode-small {
-  width: 200px; /* slightly larger */
-  margin-left: -18px;
-  margin-top: -20px; /* Added spacing to prevent overlap with QR code */
+  width: 170px;
+  margin-top: 15px;
+  margin-bottom: 2px;
+  margin-left: -20px;
 }
 
 .barcode-small svg {
   width: 100%;
-  height: 50px; /* larger and more readable */
+  height: 32px;
 }
 
 .ga-left {
-  margin-top: -22px;
-  margin-left:-55px;
+  margin: 0;
+  margin-top: -2px;
   font-weight: 800;
-  font-size: 10px;
-  width: 200px;
-  text-align: center;
+  font-size: 9px;
+  width: 170px;
+  text-align: left;
   font-family: 'Courier New', monospace;
+  color: black;
 }
 
 .info-box p {
@@ -235,20 +255,23 @@ body {
 }
 
 .app-header {
-  background-color: white;
+  background: linear-gradient(135deg, #1a5490 0%, #0d3a6b 100%);
   padding: 1.5rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.3);
+  border-bottom: 2px solid #2d6cb5;
 }
 
 .app-header h1 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  color: #1a5490;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .app-header p {
   font-size: 0.95rem;
-  color: #666;
+  color: #e8e8e8;
+  opacity: 0.95;
 }
 
 .content-section {
@@ -262,10 +285,11 @@ body {
 .input-panel {
   max-width: 800px;
   width: 100%;
-  background: white;
+  background: #0a0a0a;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(26, 84, 144, 0.2);
+  border: 2px solid #1a5490;
 }
 
 .form-group {
@@ -276,17 +300,21 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #1a5490;
+  color: #ffffff;
+  font-size: 0.95rem;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 2px solid #1a5490;
+  border-radius: 6px;
   font-size: 0.95rem;
   font-family: 'Courier New', monospace;
+  background: #000000;
+  color: #ffffff;
+  transition: all 0.3s ease;
 }
 
 .form-group textarea {
@@ -294,7 +322,7 @@ body {
 }
 
 .coordinate-display {
-  background: #f8f9fa;
+  background: #0a0a0a;
   padding: 1rem;
   border-radius: 4px;
   font-family: 'Courier New', monospace;
@@ -302,7 +330,8 @@ body {
   max-height: 200px;
   overflow-y: auto;
   white-space: pre-line;
-  border: 1px solid #ddd;
+  border: 1px solid #1a5490;
+  color: #e0e0e0;
 }
 
 .button-group {
@@ -322,12 +351,17 @@ button {
 }
 
 .btn-primary {
-  background-color: #1a5490;
-  color: white;
+  background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.3);
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #134070;
+  background: linear-gradient(135deg, #2d6cb5 0%, #1a5490 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 108, 181, 0.4);
 }
 
 .btn-primary:disabled {
@@ -336,12 +370,17 @@ button {
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background: #0a0a0a;
+  color: #ffffff;
+  border: 2px solid #1a5490;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background: #1a5490;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.3);
 }
 
 .btn-export {
@@ -352,6 +391,11 @@ button {
   justify-content: center;
   gap: 0.5rem;
   margin-top: 20px;
+  background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.3);
+  transition: all 0.3s ease;
 }
 
 .btn-export:hover {
@@ -367,17 +411,19 @@ button {
 }
 
 .mean-display {
-  background: #e8f4f8;
+  background: linear-gradient(135deg, rgba(26, 84, 144, 0.1) 0%, rgba(13, 58, 107, 0.1) 100%);
   padding: 1.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 2px solid #1a5490;
   margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.2);
 }
 
 .mean-display h3 {
   font-size: 1.1rem;
-  color: #1a5490;
+  color: #ffffff;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .mean-values {
@@ -398,16 +444,18 @@ button {
 .mean-item label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #1a5490;
+  color: #ffffff;
   margin-bottom: 0.25rem;
 }
 
 .mean-item input {
   padding: 0.5rem;
-  border: 1px solid #1a5490;
+  border: 2px solid #1a5490;
   border-radius: 4px;
   font-family: 'Courier New', monospace;
-  background: white;
+  background: #000000;
+  color: #ffffff;
+  transition: all 0.3s ease;
 }
 
 .preview-view {
@@ -417,12 +465,13 @@ button {
 }
 
 .preview-view h2 {
-  color: #1a5490;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .preview-note {
-  color: #666;
+  color: #b0b0b0;
   margin-bottom: 2rem;
 }
 
@@ -442,7 +491,8 @@ button {
 
 .preview-title {
   margin: 0;
-  color: #1a5490;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .btn-print {
@@ -468,8 +518,8 @@ button {
 .btn-download-green {
   padding: 0.5rem 0.85rem;
   border-radius: 10px;
-  background: linear-gradient(180deg, #28a745 0%, #1f8a34 100%);
-  color: white;
+  background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+  color: #ffffff;
   border: none;
   font-weight: 700;
   display: inline-flex;
@@ -478,7 +528,8 @@ button {
   gap: 8px;
   cursor: pointer;
   height: 40px;
-  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.18);
+  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.3);
+  transition: all 0.3s ease;
 }
 
 .btn-download-green .btn-icon {
@@ -486,26 +537,18 @@ button {
 }
 
 .btn-download-green:hover {
-  filter: brightness(0.95);
+  background: linear-gradient(135deg, #2d6cb5 0%, #3d7fc5 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 108, 181, 0.4);
 }
 
 .preview-container {
-  background: #e0e0e0;
+  background: #000000;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 2rem;
-}
-
-.a4-preview {
-  width: 210mm;
-  height: 297mm;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20mm;
+  border: 2px solid #1a5490;
+  box-shadow: 0 4px 20px rgba(26, 84, 144, 0.2);
 }
 
 .a4-content-simple {
@@ -658,12 +701,12 @@ button {
   font-family: 'Courier New', monospace;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #333;
+  color: #e0e0e0;
   text-align: center;
   padding: 0.5rem 1rem;
-  background: #f8f9fa;
+  background: #0a0a0a;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid #1a5490;
 }
 
 .ga-value-display {
@@ -679,7 +722,7 @@ button {
 }
 
 .stats-heading {
-  color: #1a5490;
+  color: #ffffff;
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -694,50 +737,53 @@ button {
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #1a5490 0%, #2d6cb5 100%);
+  background: linear-gradient(135deg, #1a5490 0%, #0d3a6b 100%);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(26, 84, 144, 0.2);
+  box-shadow: 0 4px 16px rgba(26, 84, 144, 0.3);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(45, 108, 181, 0.3);
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(26, 84, 144, 0.3);
+  box-shadow: 0 8px 24px rgba(45, 108, 181, 0.5);
+  border-color: rgba(61, 127, 197, 0.6);
 }
 
 .stat-card h3 {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 500;
+  font-weight: 600;
+  opacity: 0.95;
 }
 
 .stat-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .stats-detail {
-  background: white;
+  background: #0a0a0a;
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(26, 84, 144, 0.2);
+  border: 2px solid #1a5490;
 }
 
 .stats-detail h3 {
-  color: #1a5490;
+  color: #ffffff;
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
   padding-bottom: 0.75rem;
   border-bottom: 3px solid #1a5490;
+  font-weight: 700;
 }
 
 .stats-table {
@@ -748,7 +794,7 @@ button {
 
 .stats-table td {
   padding: 1rem 0.75rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(26, 84, 144, 0.3);
   font-size: 0.95rem;
 }
 
@@ -757,26 +803,26 @@ button {
 }
 
 .stats-table tr:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(26, 84, 144, 0.1);
 }
 
 .stats-table td:first-child {
   width: 45%;
-  color: #555;
+  color: #e8e8e8;
   font-weight: 600;
 }
 
 .stats-table td:last-child {
   font-family: 'Courier New', monospace;
-  color: #1a5490;
-  font-weight: 500;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* History View Styles */
 .empty-state {
   text-align: center;
   padding: 3rem 2rem;
-  color: #666;
+  color: #b0b0b0;
 }
 
 .history-list {
@@ -787,31 +833,34 @@ button {
 }
 
 .history-item {
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: #0a0a0a;
+  border: 2px solid #1a5490;
+  border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .history-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #1a5490;
+  box-shadow: 0 6px 20px rgba(26, 84, 144, 0.4);
+  border-color: #2d6cb5;
+  background: #0d0d0d;
+  transform: translateY(-2px);
 }
 
 .history-info h3 {
-  color: #1a5490;
+  color: #ffffff;
   margin-bottom: 0.75rem;
   font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .history-info p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #e8e8e8;
 }
 
 .history-actions {
@@ -830,143 +879,114 @@ button {
 }
 
 @media print {
-  /* Force single page and hide everything */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
   html, body {
-    height: 297mm !important;
     width: 210mm !important;
+    height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
     background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Hide all elements by default */
+  /* Step 1: Hide ALL elements */
   body * {
     visibility: hidden !important;
-    display: none !important;
   }
 
-  /* Show only the A4 preview container and its content */
+  /* Step 2: Show only the A4 preview and everything inside it */
   .a4-preview,
-  .a4-left-group,
-  .a4-right-group,
-  .qr-left,
-  .qr-right,
-  .barcode-small,
-  .ga-left,
-  .a4-left-group *,
-  .a4-right-group * {
+  .a4-preview * {
     visibility: visible !important;
-    display: block !important;
   }
 
-  /* Force the app structure to be minimal */
-  .app,
-  .main-content,
-  .content-section,
-  .preview-view,
-  .preview-container {
-    display: block !important;
-    visibility: visible !important;
-    position: static !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
+  /* Step 3: Position A4 sheet as the only content on the page */
   .a4-preview {
-    display: block !important;
-    visibility: visible !important;
-    position: relative !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
     width: 210mm !important;
     height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
     box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
     overflow: hidden !important;
-    page-break-after: avoid !important;
-    page-break-before: avoid !important;
-    page-break-inside: avoid !important;
+    z-index: 99999 !important;
+    transform: none !important;
   }
 
-  /* Left group with QR code, barcode, and GA text */
+  /* Left group: QR + Barcode + GA text */
   .a4-left-group {
     display: flex !important;
     position: absolute !important;
-    left: 30mm !important;
-    top: 25mm !important;
+    left: 15mm !important;
+    top: 15mm !important;
     flex-direction: column !important;
-    align-items: center !important;
-    gap: 8px !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
   }
 
-  /* QR codes */
-  .qr-left,
-  .qr-right {
+  /* Right group: QR code */
+  .a4-right-group {
     display: flex !important;
-    width: 110px !important;
-    height: 110px !important;
-    align-items: center !important;
-    justify-content: center !important;
+    position: absolute !important;
+    right: 15mm !important;
+    top: 15mm !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
   }
 
-  .qr-left svg,
-  .qr-right svg {
+  /* QR codes - left */
+  .qr-left {
+    display: flex !important;
+    width: 85px !important;
+    height: 85px !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+
+  .qr-left svg {
     display: block !important;
-    width: 110px !important;
-    height: 110px !important;
+    width: 85px !important;
+    height: 85px !important;
     filter: contrast(1.5) !important;
     image-rendering: crisp-edges !important;
     shape-rendering: crispEdges !important;
     background-color: white !important;
-    print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Barcode */
-  .barcode-small {
+  /* QR codes - right */
+  .qr-right {
     display: flex !important;
-    width: 230px !important;
-    margin: 0 !important;
+    width: 85px !important;
+    height: 85px !important;
+    align-items: center !important;
     justify-content: center !important;
   }
 
-  .barcode-small svg {
+  .qr-right svg {
     display: block !important;
-    width: 100% !important;
-    height: 50px !important;
-    print-color-adjust: exact !important;
+    width: 85px !important;
+    height: 85px !important;
+    filter: contrast(1.5) !important;
+    image-rendering: crisp-edges !important;
+    shape-rendering: crispEdges !important;
+    background-color: white !important;
     -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* GA text */
-  .ga-left {
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    font-weight: 800 !important;
-    font-size: 11px !important;
-    width: 230px !important;
-    text-align: center !important;
-    font-family: 'Courier New', monospace !important;
-    letter-spacing: 0.5px !important;
-    color: black !important;
-  }
-
-  /* Right QR code group */
-  .a4-right-group {
-    display: flex !important;
-    position: absolute !important;
-    right: 30mm !important;
-    top: 25mm !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  /* QR code styling for print */
   .qr-left svg rect[fill="black"],
   .qr-right svg rect[fill="black"],
   .qr-left svg path[fill="black"],
@@ -984,10 +1004,36 @@ button {
     stroke: none !important;
   }
 
-  /* Page settings */
-  @page {
-    size: A4 portrait;
-    margin: 0;
+  /* Barcode */
+ 
+   .barcode-small {
+  width: 170px;
+  margin-top: 15px;
+  margin-bottom: 2px;
+  margin-left: -20px;
+}
+
+  .barcode-small svg {
+    display: block !important;
+    width: 100% !important;
+    height: 32px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* GA text */
+  .ga-left {
+    display: block !important;
+    margin: 0 !important;
+    margin-top: -2px !important;
+    padding: 0 !important;
+    font-weight: 800 !important;
+    font-size: 9px !important;
+    width: 170px !important;
+    text-align: left !important;
+    font-family: 'Courier New', monospace !important;
+    letter-spacing: 0.5px !important;
+    color: black !important;
   }
 }
 /* Modal Styles */
@@ -1015,12 +1061,13 @@ button {
 }
 
 .modal-content {
-  background: white;
+  background: #141414;
   border-radius: 8px;
   padding: 0;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(26, 84, 144, 0.5);
+  border: 1px solid #1a5490;
   animation: slideUp 0.3s ease-out;
 }
 
@@ -1060,7 +1107,7 @@ button {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #333;
+  color: #1a5490;
   font-size: 0.95rem;
 }
 
@@ -1068,30 +1115,33 @@ button {
 .modal-body select {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #1a5490;
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.2s;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
 }
 
 .modal-body input:focus,
 .modal-body select:focus {
   outline: none;
-  border-color: #1a5490;
+  border-color: #2d6cb5;
 }
 
 .modal-body select {
-  background-color: white;
+  background-color: #0a0a0a;
   cursor: pointer;
 }
 
 .modal-footer {
   padding: 1rem 1.5rem;
-  background: #f8f9fa;
+  background: #1a1a1a;
   border-radius: 0 0 8px 8px;
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
+  border-top: 1px solid #1a5490;
 }
 
 .modal-footer button {

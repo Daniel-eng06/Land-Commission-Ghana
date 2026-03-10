@@ -99,9 +99,10 @@ function App() {
     if (isGenerated && editableGA && activeView === 'preview' && leftBarcodeRef.current) {
       JsBarcode(leftBarcodeRef.current, editableGA, {
         format: 'CODE128',
-        width: 2,
-        height: 80,
+        width: 1.5,
+        height: 65,
         displayValue: false,
+        margin: 0,
       });
     }
   }, [isGenerated, editableGA, activeView]);
@@ -120,51 +121,50 @@ function App() {
     }
     
     try {
+      // Generate PDF blob in background for IndexedDB storage
       const element = pdfContentRef.current;
-      if (!element) {
-        console.error('Preview content not found');
-        return;
+      if (element) {
+        const canvas = await html2canvas(element, { 
+          scale: 3, 
+          useCORS: true, 
+          logging: false,
+          backgroundColor: '#ffffff'
+        });
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
+        const pdfBlob = pdf.output('blob');
+        
+        // Save to IndexedDB
+        await saveGeneration({
+          gapaNumber,
+          jobCode,
+          meanCoordinates,
+          polygonPoints,
+          editableGA,
+          pdfBlob,
+        });
+        
+        // Refresh saved generations list
+        const generations = await getAllGenerations();
+        setSavedGenerations(generations);
+        
+        // Listen for when print dialog closes
+        const afterPrintHandler = () => {
+          // Navigate back to Input Data view after print dialog closes
+          setActiveView('input');
+          window.removeEventListener('afterprint', afterPrintHandler);
+        };
+        
+        window.addEventListener('afterprint', afterPrintHandler);
+        
+        // Open browser's native print dialog
+        window.print();
       }
-      
-      // Capture the preview with high quality
-      const canvas = await html2canvas(element, { 
-        scale: 3, 
-        useCORS: true, 
-        logging: false,
-        backgroundColor: '#ffffff'
-      });
-      const imgData = canvas.toDataURL('image/png', 1.0);
-      
-      // Create PDF
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
-      
-      // Create blob and open in new window for preview/download
-      const pdfBlob = pdf.output('blob');
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-      
-      // Open PDF in new window - user can preview and save from there
-      window.open(pdfUrl, '_blank');
-      
-      // Save to IndexedDB
-      await saveGeneration({
-        gapaNumber,
-        jobCode,
-        meanCoordinates,
-        polygonPoints,
-        editableGA,
-        pdfBlob,
-      });
-      
-      // Refresh saved generations list
-      const generations = await getAllGenerations();
-      setSavedGenerations(generations);
-      
-      // Clean up the URL after a delay
-      setTimeout(() => URL.revokeObjectURL(pdfUrl), 1000);
     } catch (error) {
-      console.error('Error generating PDF', error);
-      alert('Error generating PDF. Please try again.');
+      console.error('Error saving generation', error);
+      alert('Error saving generation. Please try again.');
     }
   };
 
@@ -448,11 +448,11 @@ function App() {
                     {polygonPoints && polygonPoints.length > 0 ? (
                       <QRCodeSVG 
                         value={formatPolygonCoordinates(polygonPoints) || 'No data'} 
-                        size={110} 
+                        size={85} 
                         level="M" 
                       />
                     ) : (
-                      <div style={{width: 110, height: 110, background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>No Data</div>
+                      <div style={{width: 85, height: 85, background: '#1a1a1a', border: '1px solid #1a5490', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#b0b0b0'}}>No Data</div>
                     )}
                   </div>
 
@@ -467,15 +467,15 @@ function App() {
 
                 {/** Right QR on top-right */}
                 <div className="a4-right-group">
-                  <div className="qr-left qr-right">
+                  <div className="qr-right">
                     {gapaNumber && gapaNumber.trim() ? (
                       <QRCodeSVG 
                         value={gapaNumber.trim()} 
-                        size={110} 
+                        size={85} 
                         level="M" 
                       />
                     ) : (
-                      <div style={{width: 110, height: 110, background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>No GAPA</div>
+                      <div style={{width: 85, height: 85, background: '#1a1a1a', border: '1px solid #1a5490', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#b0b0b0', fontSize: '8px'}}>No GAPA</div>
                     )}
                   </div>
                 </div>
@@ -494,9 +494,9 @@ function App() {
               <h2 className="stats-heading">Generation History</h2>
               {savedGenerations.length === 0 ? (
                 <div className="empty-state">
-                  <FaHistory style={{ fontSize: '3rem', color: '#ccc', marginBottom: '1rem' }} />
+                  <FaHistory style={{ fontSize: '3rem', color: '#1a5490', marginBottom: '1rem' }} />
                   <p>No saved generations yet.</p>
-                  <p style={{ fontSize: '0.9rem', color: '#666' }}>Generate and export PDFs to see them here.</p>
+                  <p style={{ fontSize: '0.9rem', color: '#b0b0b0' }}>Generate and export PDFs to see them here.</p>
                 </div>
               ) : (
                 <div className="history-list">
